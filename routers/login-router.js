@@ -72,7 +72,7 @@ Router.post('/signup', async (req, res) => {
    }
 })
 
-Router.post('/login',  checkNotAuthenticated, passport.authenticate('local', {
+Router.post('/login', passport.authenticate('local', {
       successRedirect: '/',
       failureRedirect: '/login',
       failureFlash: true
@@ -85,4 +85,8 @@ Router.get('/', checkAuthenticated, (req, res) =>{
    res.render('index.ejs', {name : req.user.name})
 });
 
+Router.delete('/logout', (req, res) => {
+   req.logOut();
+   res.redirect('/login')
+})
 module.exports = Router;

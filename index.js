@@ -7,11 +7,12 @@ const db = require('./extension');
 const flash = require('express-flash');
 const session = require('express-session');
 const passport = require('passport');
-
+const methodOverRide = require('method-override');
 
 const app = express();
 
 app.set('view-engine', 'ejs');
+app.use(methodOverRide('_method'))
 app.use(express.urlencoded({extended: false}))
 app.use(flash());
 app.use(session({
