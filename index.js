@@ -25,8 +25,10 @@ app.use(passport.initialize());
 app.use(passport.session())
 app.use(express.json());
 
-app.use('/', loginRouter, (req, res) =>{
-} ) 
-
+// Move loginRouter middleware below passport initialization
+app.use('/', (req, res, next) => {
+  loginRouter(req, res, next);
+});
 
 app.listen(process.env.PORT, () => console.log(`Connected to http://localhost${process.env.PORT}`));
+
